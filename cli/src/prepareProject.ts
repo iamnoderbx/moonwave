@@ -419,7 +419,7 @@ export function prepareProject(
       const packageJsonPath = path.join(tempDir, "package.json")
 
       const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, "utf8"))
-      packageJson.dependencies["docusaurus-plugin-moonwave"] =
+      packageJson.dependencies["@iamnoderbx/docusaurus-plugin-moonwave"] =
         moonwavePluginPath
           ? path.resolve(process.cwd(), moonwavePluginPath)
           : path.resolve(__dirname, "../../docusaurus-plugin-moonwave")

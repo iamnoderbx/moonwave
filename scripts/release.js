@@ -34,7 +34,7 @@ function replaceInFile(filePath, pattern, replacement) {
 }
 
 async function pollPluginPublished() {
-  const response = execSync("npm view docusaurus-plugin-moonwave version");
+  const response = execSync("npm view @iamnoderbx/docusaurus-plugin-moonwave version");
   if (response.toString().trim() !== version.trim()) {
     await new Promise(resolve => setTimeout(resolve, 5000));
     await pollPluginPublished();
@@ -57,7 +57,7 @@ run("cli", "npm i --package-lock-only")
 
 updatePackageDependencyVersion(
   "cli/template/root/package.json",
-  "docusaurus-plugin-moonwave",
+  "@iamnoderbx/docusaurus-plugin-moonwave",
   version
 )
 

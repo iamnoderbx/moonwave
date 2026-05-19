@@ -115,7 +115,7 @@ export default function getDocusaurusConfig({
     },
     plugins: [
       [
-        "docusaurus-plugin-moonwave",
+        "@iamnoderbx/docusaurus-plugin-moonwave",
         {
           id: "moonwave",
           code: validCodePaths,

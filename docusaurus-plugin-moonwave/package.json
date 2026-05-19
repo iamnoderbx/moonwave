@@ -1,5 +1,5 @@
 {
-  "name": "docusaurus-plugin-moonwave",
+  "name": "@iamnoderbx/docusaurus-plugin-moonwave",
   "version": "1.3.0",
   "description": "Display your API docs generated from Moonwave in Docusaurus",
   "main": "src/index.js",
@@ -8,14 +8,17 @@
   },
   "author": "eryn L. K. <e@eryn.io>",
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/evaera/moonwave.git"
+    "url": "git+https://github.com/iamnoderbx/moonwave.git"
   },
   "bugs": {
-    "url": "https://github.com/evaera/moonwave/issues"
+    "url": "https://github.com/iamnoderbx/moonwave/issues"
   },
-  "homepage": "https://github.com/evaera/moonwave/tree/master/docusaurus-plugin-moonwave",
+  "homepage": "https://github.com/iamnoderbx/moonwave/tree/master/docusaurus-plugin-moonwave",
   "type": "module",
   "dependencies": {
     "@mapbox/rehype-prism": "^0.9.0",
