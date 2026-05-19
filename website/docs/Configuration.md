@@ -169,6 +169,8 @@ With this option set, folders inside `YOUR_REPO/packages` will be automatically 
 
 For example, a class defined in `YOUR_REPO/packages/thing-doer/init.lua` will automatically be placed in a section called `Thing Doer`.
 
+Nested folders become nested sections, so the directory structure on disk is mirrored in the sidebar. For example, a class defined in `YOUR_REPO/packages/widgets/inputs/button.lua` will automatically be placed in `Widgets > Inputs`. Classes that live directly inside a folder appear alongside any subsections of that folder.
+
 ### Table of Contents (TOC)
 
 You can customize categories in the Table of Contents of each API page. To create a category, first tag all items that should be included in the category with the `@tag` tag.

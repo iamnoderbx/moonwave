@@ -470,40 +470,60 @@ export default (context, options) => ({
 
       const prefix = options.autoSectionPath
 
+      // Convert kebab-case, snake_case, camelCase, PascalCase, or sentence case to Title Case
+      const dirToTitle = (dir) =>
+        dir
+          .replace(/(?<!-)([A-Z])/g, " $1")
+          .replace("-", " ")
+          .replace("_", " ")
+          .split(/\s+/)
+          .filter((str) => str.length > 0)
+          .map(capitalize)
+          .join(" ")
+
       for (const luaClass of filteredContent) {
         if (luaClass.source.path.startsWith(prefix)) {
           const classPath = luaClass.source.path.slice(prefix.length + 1)
 
-          const nextDirMatch = classPath.match(/^(.+?)\//)
+          const segments = classPath.split("/").filter((s) => s.length > 0)
+          const dirSegments = segments.slice(0, -1)
 
-          if (nextDirMatch) {
-            const nextDir = nextDirMatch[1]
+          if (dirSegments.length === 0) {
+            continue
+          }
 
-            // convert kebab-case, snake_case, camelCase, PascalCase to Title Case
-            const title = nextDir
-              .replace(/(?<!-)([A-Z])/g, " $1")
-              .replace("-", " ")
-              .replace("_", " ")
-              .split(/\s+/)
-              .filter((str) => str.length > 0)
-              .map(capitalize)
-              .join(" ")
+          let currentLevel = classOrder
+          let currentSection = null
 
-            const existingSection = classOrder.find(
-              (section) => section.section === title
+          for (const dir of dirSegments) {
+            const title = dirToTitle(dir)
+
+            let existing = currentLevel.find(
+              (entry) =>
+                entry &&
+                typeof entry === "object" &&
+                entry.section === title
             )
 
-            if (existingSection) {
-              // avoid duplicating classes
-              if (!existingSection.classes.includes(luaClass.name)) {
-                existingSection.classes.push(luaClass.name)
-              }
-            } else {
-              classOrder.push({
-                section: title,
-                classes: [luaClass.name],
-              })
+            if (!existing) {
+              existing = { section: title }
+              currentLevel.push(existing)
             }
+
+            if (!Array.isArray(existing.items)) {
+              existing.items = []
+            }
+
+            currentSection = existing
+            currentLevel = existing.items
+          }
+
+          if (!Array.isArray(currentSection.classes)) {
+            currentSection.classes = []
+          }
+
+          if (!currentSection.classes.includes(luaClass.name)) {
+            currentSection.classes.push(luaClass.name)
           }
         }
       }
