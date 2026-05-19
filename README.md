@@ -27,6 +27,28 @@ Lua is the moon. The moon is your code. The moon influences the waves in the oce
 
 [Check out the Documentation website](https://eryn.io/moonwave/)
 
+## Using this fork in your projects
+
+This fork adds nested-folder support to `autoSectionPath`. It is not published to npm; the
+intended workflow for small teams is to use the upstream `moonwave` CLI and swap in this
+fork's Docusaurus plugin via `MOONWAVE_PLUGIN_PATH`.
+
+A helper script handles the bootstrap. Copy `scripts/moonwave-fork.sh` (or
+`scripts/moonwave-fork.ps1` on Windows) into any project that uses Moonwave, then:
+
+```sh
+# one-time, in your project root
+npm install -g moonwave          # upstream CLI; skip if you already have it
+./moonwave-fork.sh setup         # clones this fork into .moonwave-fork/
+
+# everyday use
+./moonwave-fork.sh dev           # equivalent to `moonwave dev` with this fork's plugin
+./moonwave-fork.sh build         # equivalent to `moonwave build`
+```
+
+Add `.moonwave-fork/` to your project's `.gitignore`. Re-running the script will fetch
+and reset the fork to the latest commit on `master`.
+
 ## Building in Development and Contributing
 
 Requirements:
